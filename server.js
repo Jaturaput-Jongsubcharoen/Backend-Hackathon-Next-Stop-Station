@@ -1,17 +1,26 @@
+require("dotenv").config();
 const express = require("express");
-const app = express();
 const cors = require("cors");
-const corsOptions = {
-    origin: ["http://localhost:5173"],
-};
-app.use(cors(corsOptions));
+const app = express();
+
+const PORT = process.env.PORT || 8081;
+const URL_FRONTEND = process.env.URL_FRONTEND || "http://localhost:5173";
+
+app.use(express.json());
+
+app.use(
+  cors({
+    origin: URL_FRONTEND,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // IMPORTANT
+  })
+);
 
 app.get("/api", (req, res) => {
-    res.json({
-        fruits: ["apple", "orange", "banana"]
-    });
+  res.json({ fruits: ["apple", "orange", "banana"] });
 });
 
-app.listen( 8080, () => {
-    console.log("Sever runs on port 8080.");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`CORS allowed for: ${URL_FRONTEND}`);
 });
