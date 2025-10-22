@@ -133,10 +133,6 @@ const fleetData = {
       batteryLifeExtended: 8,
     },
 
-    // ------------------------
-    // ADDITIONAL BUSES
-    // ------------------------
-
     // HEALTHY BUS
     {
       id: "Bus 107",
